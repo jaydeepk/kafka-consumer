@@ -1,0 +1,11 @@
+{
+  "sources": [
+    {
+      "provider": "git",
+      "repository": "git@github.com:jaydeepk/kafka-consumer.git",
+      "stub": [
+        "kafka.yaml"
+      ]
+    }
+  ]
+}
