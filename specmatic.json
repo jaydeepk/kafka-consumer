@@ -5,7 +5,7 @@
       "repository": "git@github.com:jaydeepk/kafka-consumer.git",
       "stub": [
         "kafka.yaml",
-        "orders-exercise.yaml"
+        "orders-service.yaml"
       ]
     }
   ]
