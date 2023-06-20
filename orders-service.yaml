@@ -1,0 +1,522 @@
+openapi: 3.0.0
+info:
+  title: Order API
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/products/{id}':
+    parameters:
+      - schema:
+          type: number
+        name: id
+        in: path
+        required: true
+        examples:
+          GET_DETAILS:
+            value: 10
+          UPDATE_DETAILS:
+            value: 10
+          DELETE_PRODUCT:
+            value: 20
+    get:
+      summary: Fetch product details
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+              examples:
+                GET_DETAILS:
+                  value:
+                    name: 'XYZ Phone'
+                    type: 'gadget'
+                    inventory: 10
+                    id: 10
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  timestamp:
+                    type: string
+                  status:
+                    type: integer
+                  error:
+                    type: string
+                  message:
+                    type: string
+                  path:
+                    type: string
+      operationId: get-product-id
+    post:
+      summary: Update product details
+      operationId: post-products-id
+      responses:
+        '200':
+          description: Update successful
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                UPDATE_DETAILS:
+                  value:
+                    name: 'XYZ Fone'
+                    type: 'gadget'
+                    inventory: 10
+                    id: 10
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  timestamp:
+                    type: string
+                  status:
+                    type: integer
+                  error:
+                    type: string
+                  message:
+                    type: string
+                  path:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Product'
+            examples:
+              UPDATE_DETAILS:
+                value:
+                  name: 'XYZ Fone'
+                  type: 'gadget'
+                  inventory: 10
+                  id: 10
+    delete:
+      summary: Delete a product
+      operationId: delete-products-id
+      responses:
+        '200':
+          description: Deletion successful
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                DELETE_PRODUCT:
+                  value: ''
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  timestamp:
+                    type: string
+                  status:
+                    type: integer
+                  error:
+                    type: string
+                  message:
+                    type: string
+                  path:
+                    type: string
+  /products:
+    post:
+      summary: Add new product
+      operationId: post-products
+      responses:
+        '200':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductId'
+              examples:
+                ADD_PRODUCT:
+                  value:
+                    id: 10
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  timestamp:
+                    type: string
+                  status:
+                    type: integer
+                  error:
+                    type: string
+                  message:
+                    type: string
+                  path:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProductDetails'
+            examples:
+              ADD_PRODUCT:
+                value:
+                  name: 'XYZ Laptop'
+                  type: 'gadget'
+                  inventory: 10
+    get:
+      summary: Search for products
+      operationId: get-products
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+              examples:
+                SEARCH_1:
+                  value:
+                    - name: 'XYZ Fone'
+                      type: 'gadget'
+                      inventory: 10
+                      id: 3
+                SEARCH_2:
+                  value:
+                    - name: 'XYZ Fone'
+                      type: 'gadget'
+                      inventory: 10
+                      id: 3
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  timestamp:
+                    type: string
+                  status:
+                    type: integer
+                  error:
+                    type: string
+                  message:
+                    type: string
+                  path:
+                    type: string
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: name
+          examples:
+            SEARCH_1:
+              value: ''
+            SEARCH_2:
+              value: XYZ
+        - schema:
+            type: string
+          in: query
+          name: type
+          examples:
+            SEARCH_1:
+              value: gadget
+            SEARCH_2:
+              value: gadget
+  /orders:
+    post:
+      summary: Create an order
+      operationId: post-orders
+      responses:
+        '200':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderId'
+              examples:
+                CREATE_ORDER_10:
+                  value:
+                      id: 10
+                CREATE_ORDER_20:
+                  value:
+                      id: 20
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  timestamp:
+                    type: string
+                  status:
+                    type: integer
+                  error:
+                    type: string
+                  message:
+                    type: string
+                  path:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderDetails'
+            examples:
+              CREATE_ORDER_10:
+                value:
+                  productId: 10
+                  count: 2
+                  status: 'pending'
+              CREATE_ORDER_20:
+                value:
+                  productId: 10
+                  count: 1
+                  status: 'pending'
+    get:
+      summary: Search for orders
+      operationId: get-orders
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  timestamp:
+                    type: string
+                  status:
+                    type: integer
+                  error:
+                    type: string
+                  message:
+                    type: string
+                  path:
+                    type: string
+      parameters:
+        - schema:
+            type: number
+          in: query
+          name: productId
+        - schema:
+            type: string
+          in: query
+          name: status
+      description: ''
+  '/orders/{id}':
+    parameters:
+      - schema:
+          type: number
+        name: id
+        in: path
+        required: true
+        examples:
+          GET_ORDER_DETAILS_10:
+            value: 10
+          GET_ORDER_DETAILS_20:
+            value: 20
+    get:
+      summary: Fetch order details
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                GET_ORDER_DETAILS_10:
+                  value:
+                    productId: 10
+                    count: 2
+                    status: 'pending'
+                    id: 10
+                GET_ORDER_DETAILS_20:
+                  value:
+                    productId: 10
+                    count: 1
+                    status: 'pending'
+                    id: 20
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  timestamp:
+                    type: string
+                  status:
+                    type: integer
+                  error:
+                    type: string
+                  message:
+                    type: string
+                  path:
+                    type: string
+      operationId: get-orders-id
+      parameters: []
+    post:
+      summary: Update order details
+      operationId: post-orders-id
+      responses:
+        '200':
+          description: Success
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  timestamp:
+                    type: string
+                  status:
+                    type: integer
+                  error:
+                    type: string
+                  message:
+                    type: string
+                  path:
+                    type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Order'
+    delete:
+      summary: Cancel an order
+      operationId: delete-orders-id
+      responses:
+        '200':
+          description: Cancel successful
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: 'Bad Request'
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  timestamp:
+                    type: string
+                  status:
+                    type: integer
+                  error:
+                    type: string
+                  message:
+                    type: string
+                  path:
+                    type: string
+
+components:
+  schemas:
+    ProductDetails:
+      title: Product Details
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          $ref: '#/components/schemas/ProductType'
+        inventory:
+          type: integer
+      required:
+        - name
+        - type
+        - inventory
+    ProductType:
+      type: string
+      title: Product Type
+      enum:
+        - book
+        - food
+        - gadget
+        - other
+    ProductId:
+      title: Product Id
+      type: object
+      properties:
+        id:
+          type: integer
+      required:
+        - id
+    Product:
+      title: Product
+      allOf:
+        - $ref: '#/components/schemas/ProductId'
+        - $ref: '#/components/schemas/ProductDetails'
+    OrderDetails:
+      title: Order Details
+      type: object
+      properties:
+        productId:
+          type: integer
+        count:
+          type: integer
+        status:
+          $ref: '#/components/schemas/OrderStatus'
+      required:
+        - productId
+        - count
+        - status
+    OrderStatus:
+      type: string
+      title: OrderStatus
+      enum:
+        - fulfilled
+        - pending
+        - cancelled
+    OrderId:
+      title: Order Id
+      type: object
+      properties:
+        id:
+          type: integer
+      required:
+        - id
+    Order:
+      title: Order
+      allOf:
+        - $ref: '#/components/schemas/OrderId'
+        - $ref: '#/components/schemas/OrderDetails'
+  parameters:
+    OrderStatusParam:
+      name: OrderStatusParam
+      in: query
+      required: false
+      schema:
+        type: string
+        enum:
+          - fulfilled
+          - pending
+          - cancelled
