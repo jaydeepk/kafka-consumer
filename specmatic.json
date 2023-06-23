@@ -3,6 +3,9 @@
     {
       "provider": "git",
       "repository": "git@github.com:jaydeepk/kafka-consumer.git",
+      "test": [
+        "kafka.yaml"
+      ],
       "stub": [
         "kafka.yaml",
         "orders-service.yaml"

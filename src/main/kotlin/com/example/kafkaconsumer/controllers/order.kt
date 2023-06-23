@@ -18,11 +18,11 @@ class order {
     @PostMapping("/send-message")
     fun sendMessageToKafka() {
         val props = Properties()
-        props["bootstrap.servers"] = "localhost:10001"
+        props["bootstrap.servers"] = "localhost:9092"
         props["key.serializer"] = "org.apache.kafka.common.serialization.StringSerializer"
         props["value.serializer"] = "org.apache.kafka.common.serialization.StringSerializer"
         val producer = KafkaProducer<String, String>(props)
-        val producerRecord = ProducerRecord("test-topic", "hello", "Hello from Kafka Producer")
+        val producerRecord = ProducerRecord<String, String>("test-topic","""{"id" : 10, "name": "Neo"}""")
         producer.send(producerRecord)
         producer.close()
     }
