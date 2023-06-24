@@ -1,13 +1,13 @@
 asyncapi: 2.6.0
 info:
-  title: Kafka Queue Example
+  title: Product audits API
   version: '1.0.0'
 servers:
-  activemq:
+  kafka-dev:
     url: tcp://localhost:61616
     protocol: kafka
 channels:
-  test-topic:
+  product-queries:
     publish:
       operationId: publishObjectMessage
       message:
@@ -17,30 +17,23 @@ channels:
               type: string
             bindingVersion: '0.4.0'
         payload:
-          $ref: "#/components/messages/Task"
-
-
+          $ref: "#/components/messages/product"
 components:
   messages:
-    Task:
-      name: Task
-      title: A Task to be processed
-      summary: Inform about a new user task in the system
+    product:
+      name: product
+      title: An inventory product
+      summary: Product representing items in inventory
       contentType: application/json
       payload:
         type: object
-        required:
-          - id
-          - name
         properties:
-          id:
-            type: integer
           name:
+            description: Every product has a name
             type: string
-      examples:
-        - name: success
-          payload:
-            id: 10
-            name: "Hello"
-
-
+          inventory:
+            description: Count of items in inventory
+            type: number
+          id:
+            description: Unique identifier of the product
+            type: number

@@ -22,7 +22,7 @@ class order {
         props["key.serializer"] = "org.apache.kafka.common.serialization.StringSerializer"
         props["value.serializer"] = "org.apache.kafka.common.serialization.StringSerializer"
         val producer = KafkaProducer<String, String>(props)
-        val producerRecord = ProducerRecord<String, String>("test-topic","""{"id" : 10, "name": "Neo"}""")
+        val producerRecord = ProducerRecord<String, String>("test-topic","""{"name" : "John", "inventory": 10, "id": 1}""")
         producer.send(producerRecord)
         producer.close()
     }
