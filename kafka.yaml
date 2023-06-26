@@ -18,6 +18,17 @@ channels:
             bindingVersion: '0.4.0'
         payload:
           $ref: "#/components/messages/product"
+  test-topic:
+    publish:
+      operationId: publishTaskMessage
+      message:
+        bindings:
+          kafka:
+            key:
+              type: string
+            bindingVersion: '0.4.0'
+        payload:
+          $ref: "#/components/messages/Task"
 components:
   messages:
     product:
@@ -37,3 +48,18 @@ components:
           id:
             description: Unique identifier of the product
             type: number
+    Task:
+      name: Task
+      title: A Task to be processed
+      summary: Inform about a new user task in the system
+      contentType: application/json
+      payload:
+        type: object
+        required:
+          - id
+          - name
+        properties:
+          id:
+            type: integer
+          name:
+            type: string
