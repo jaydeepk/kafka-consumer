@@ -1,0 +1,50 @@
+{
+  "payload": {
+    "_id": "6494011dd860fe24f8625084",
+    "date_meta": {
+      "created_on": "2023-06-22T08:06:53.210Z",
+      "modified_on": "2023-06-22T08:06:54.162Z"
+    },
+    "tags": [
+      "abhinav"
+    ],
+    "title": "my first blog",
+    "sluggg": "1st_blog",
+    "feature_image": {
+      "secure_url": "https://google.com"
+    },
+    "reading_time": "5 mintutes",
+    "content": [
+      {
+        "type": "html",
+        "value": "<p>hey there!</p>"
+      }
+    ],
+    "seo": {
+      "title": "my first blog"
+    },
+    "_schedule": {
+      "next_schedule": [
+        {
+          "start": "2021-03-05T23:30:00.000Z",
+          "end": "+053199-04-17T06:20:13.000Z"
+        }
+      ],
+      "cron": "* 5 * * *",
+      "start": "2021-03-31T23:30:00.000Z",
+      "end": "2021-03-31T23:55:00.000Z",
+      "duration": 6000
+    },
+    "published": true,
+    "author": {
+      "name": "Fynd App"
+    },
+    "archived": true,
+    "application": "000000000000000000000001"
+  },
+  "meta": {
+    "job_type": "blog",
+    "action": "delete",
+    "trace": "convex.cbabe89e-f33f-440a-bb50-a0eb32b9243a"
+  }
+}

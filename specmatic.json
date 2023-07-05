@@ -8,6 +8,7 @@
       ],
       "stub": [
         "kafka.yaml",
+        "complex_schema_with_arrays.yaml",
         "orders-service.yaml"
       ]
     }
