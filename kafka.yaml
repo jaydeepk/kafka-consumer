@@ -1,6 +1,6 @@
 asyncapi: 2.6.0
 info:
-  title: Product audits API 6
+  title: Product audits API 7
   version: '1.0.0'
 servers:
   kafka-dev:
