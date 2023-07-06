@@ -449,7 +449,7 @@ components:
         type:
           $ref: '#/components/schemas/ProductType'
         inventory:
-          type: integerLLL
+          type: integer
       required:
         - name
         - type
